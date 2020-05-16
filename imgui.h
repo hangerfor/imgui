@@ -1856,6 +1856,9 @@ struct ImColor
 // Hold a series of drawing commands. The user provides a renderer for ImDrawData which essentially contains an array of ImDrawList.
 //-----------------------------------------------------------------------------
 
+// The maximum line width to bake anti-aliased textures for
+#define IM_DRAWLIST_TEX_AA_LINES_WIDTH_MAX      (64)
+
 // ImDrawCallback: Draw callbacks for advanced uses [configurable type: override in imconfig.h]
 // NB: You most likely do NOT need to use draw callbacks just to create your own widget or customized UI rendering,
 // you can poke into the draw list for that! Draw callback may be useful for example to:
@@ -2274,7 +2277,7 @@ struct ImFontAtlas
     ImVector<ImFontConfig>      ConfigData;         // Internal data
     int                         CustomRectIds[1];   // Identifiers of custom texture rectangle used by ImFontAtlas/ImDrawList
     int                         AALineRectId;       // Custom texture rectangle ID for anti-aliased lines
-    ImVector<ImVec4>            TexUvAALines;       // UVs for anti-aliased line textures
+    ImVec4                      TexUvAALines[IM_DRAWLIST_TEX_AA_LINES_WIDTH_MAX+1]; // UVs for anti-aliased line textures
 
 #ifndef IMGUI_DISABLE_OBSOLETE_FUNCTIONS
     typedef ImFontAtlasCustomRect    CustomRect;         // OBSOLETED in 1.72+
